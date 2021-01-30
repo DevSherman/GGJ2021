@@ -23,6 +23,10 @@ public class Interactor : MonoBehaviour
     {
         mainCamera = GetComponentInChildren<Camera>();
         items = new List<Item>();
+
+        itemNullSprite = Resources.Load<Sprite>("itemNull");
+        itemImage = GameObject.Find("GameHUD").GetComponent<GameHUD>().itemImage;
+
     }
 
     private void Update()
@@ -188,6 +192,8 @@ public class Interactor : MonoBehaviour
                 }
                 Destroy(currentItem);
                 currentItem = null;
+
+                Debug.Log("Item used");
             }
         }
     }
