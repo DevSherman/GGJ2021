@@ -12,10 +12,12 @@ public class PlayerController : MonoBehaviour
     public bool moving;
 
     private Rigidbody rig;
+    private Camera mainCamera;
 
     private void Awake()
     {
         rig = GetComponent<Rigidbody>();
+        mainCamera = GetComponentInChildren<Camera>();
     }
 
     void Update()
@@ -30,6 +32,8 @@ public class PlayerController : MonoBehaviour
         else moving = false;
 
         jumping = !IsGrounded();
+
+        Wawla();
     }
     void FixedUpdate()
     {
@@ -43,5 +47,16 @@ public class PlayerController : MonoBehaviour
     bool IsGrounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+    }
+
+    void Wawla()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if(Physics.Linecast(mainCamera.transform.position, mainCamera.transform.forward * 100, out hit))
+        {
+            Debug.Log(hit.collider.gameObject.name);    
+        }
+        Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * 100, Color.red);
     }
 }
