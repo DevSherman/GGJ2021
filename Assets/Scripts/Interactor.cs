@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Interactor : MonoBehaviour
 {
@@ -12,9 +13,14 @@ public class Interactor : MonoBehaviour
     public float distance = 5f;
     public float smooth = 5f;
 
+    public Image itemImage;
+    public List<Item> items;
+
+
     private void Start()
     {
         mainCamera = GetComponentInChildren<Camera>();
+        items = new List<Item>();
     }
 
     private void Update()
@@ -35,47 +41,66 @@ public class Interactor : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(mainCamera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0)), out hit, distance))
         {
-            Debug.Log(hit.collider.gameObject.name);
+            //Debug.Log(hit.collider.gameObject.name);
 
             if (objectToInteract != null && hit.collider.gameObject != objectToInteract)
             {
                 objectToInteract.GetComponent<Outline>().HideOutline();
             }
 
-            if (hit.collider != null && hit.collider.CompareTag("Interactable"))
+            if (hit.collider != null)
             {
-                hit.collider.GetComponent<Outline>().ShowOutline();
+                //Debug.Log(hit.collider.gameObject.name);
 
-                if (hit.collider.GetComponent<Interactable>().isPickable)
+                if (hit.collider.CompareTag("Interactable"))
+                {
+                    if (hit.collider.GetComponent<Interactable>().isPickable)
+                    {
+                        objectToInteract = hit.collider.gameObject;
+                        objectToInteract.GetComponent<Outline>().ShowOutline();
+
+                        if (Input.GetKeyDown(KeyCode.E))
+                        {
+                            currentInteractable = objectToInteract;
+                            //objectToInteract = null;
+                            currentInteractable.GetComponent<Interactable>().isPickable = false;
+                            currentInteractable.transform.SetParent(mainCamera.transform);
+                            currentInteractable.transform.position = Vector3.Lerp(
+                                currentInteractable.transform.position,
+                                mainCamera.transform.position + mainCamera.transform.forward * distance,
+                                Time.deltaTime * smooth);
+                            currentInteractable.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                            currentInteractable.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                            grabbing = true;
+                        }
+                    }
+                }
+                if (hit.collider.CompareTag("Item"))
                 {
                     objectToInteract = hit.collider.gameObject;
+                    objectToInteract.GetComponent<Outline>().ShowOutline();
 
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        currentInteractable = objectToInteract;
-                        //objectToInteract = null;
-                        currentInteractable.GetComponent<Interactable>().isPickable = false;
-                        currentInteractable.transform.SetParent(mainCamera.transform);
-                        currentInteractable.transform.position = Vector3.Lerp(
-                            currentInteractable.transform.position,
-                            mainCamera.transform.position + mainCamera.transform.forward * distance,
-                            Time.deltaTime * smooth);
-                        currentInteractable.gameObject.GetComponent<Rigidbody>().useGravity = false;
-                        currentInteractable.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                        grabbing = true;
+                        AddItemToInv(objectToInteract.GetComponent<Item>());
                     }
                 }
-
+            }
+            else 
+            {
+                HideOutline();
             }
         }
         else
         {
-            if (objectToInteract != null)
-            {
-                objectToInteract.GetComponent<Outline>().HideOutline();
-            }
+            HideOutline();
         }
-    } 
+    }
+    void HideOutline()
+    {
+        if (objectToInteract != null)
+            objectToInteract.GetComponent<Outline>().HideOutline();
+    }
 
     void Drop()
     {
@@ -88,5 +113,12 @@ public class Interactor : MonoBehaviour
             currentInteractable = null;
             grabbing = false;
         }
+    }
+
+    void AddItemToInv(Item item)
+    {
+        items.Add(item);
+        Destroy(objectToInteract);
+        objectToInteract = null;
     }
 }

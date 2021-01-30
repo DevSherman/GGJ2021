@@ -16,25 +16,33 @@ using UnityEngine;
 public class Outline : MonoBehaviour 
 {
     //Code added
+    private bool outlineActive;
+
+
     public void ShowOutline()
     {
-        foreach (var renderer in renderers)
+        if(!outlineActive)
         {
+            outlineActive = true;
+            foreach (var renderer in renderers)
+            {
 
-            // Append outline shaders
-            var materials = renderer.sharedMaterials.ToList();
+                // Append outline shaders
+                var materials = renderer.sharedMaterials.ToList();
 
-            materials.Add(outlineMaskMaterial);
-            materials.Add(outlineFillMaterial);
+                materials.Add(outlineMaskMaterial);
+                materials.Add(outlineFillMaterial);
 
-            renderer.materials = materials.ToArray();
+                renderer.materials = materials.ToArray();
+            }
         }
+
     }
     public void HideOutline()
     {
+        outlineActive = false;
         foreach (var renderer in renderers)
         {
-
             // Remove outline shaders
             var materials = renderer.sharedMaterials.ToList();
 
