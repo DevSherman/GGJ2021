@@ -41,7 +41,7 @@ public class Interactor : MonoBehaviour
 
         if (!grabbing)
         {
-            Drag();
+            UpdateRaycast();
         }
         else
         {
@@ -49,7 +49,7 @@ public class Interactor : MonoBehaviour
         }
     }
 
-    void Drag()
+    void UpdateRaycast()
     {
         //Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -97,6 +97,16 @@ public class Interactor : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         AddItemToInv();
+                    }
+                }
+                if (hit.collider.CompareTag("Activable"))
+                {
+                    objectToInteract = hit.collider.gameObject;
+                    objectToInteract.GetComponent<Outline>().ShowOutline();
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        
                     }
                 }
             }
