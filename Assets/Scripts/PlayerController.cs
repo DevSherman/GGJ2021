@@ -12,12 +12,12 @@ public class PlayerController : MonoBehaviour
     public bool moving;
 
     private Rigidbody rig;
-    private Camera mainCamera;
+    private Animator anim;
 
     private void Awake()
     {
         rig = GetComponent<Rigidbody>();
-        mainCamera = GetComponentInChildren<Camera>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -27,16 +27,21 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        float v = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-        float h = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        if (v != 0 || h != 0)
+        Vector2 direction = new Vector2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
+
+        if (direction.magnitude > 0)
         {
-            transform.Translate(h, 0, v, Space.Self);
+            Vector2 movement = direction * speed * Time.deltaTime;
+
+            transform.Translate(movement.y, 0, movement.x, Space.Self);
             moving = true;
         }
         else moving = false;
 
         jumping = !IsGrounded();
+
+        anim.SetFloat("Horizontal", direction.y);
+        anim.SetFloat("Vertical", direction.x);
     }
     void FixedUpdate()
     {
