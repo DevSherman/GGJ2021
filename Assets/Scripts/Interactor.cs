@@ -14,8 +14,10 @@ public class Interactor : MonoBehaviour
     public float smooth = 5f;
 
     public Image itemImage;
-    public List<Item> items;
-
+    public Sprite itemNullSprite;
+    private List<Item> items;
+    private Item currentItem;
+    private int itemIndex = -1;
 
     private void Start()
     {
@@ -25,6 +27,18 @@ public class Interactor : MonoBehaviour
 
     private void Update()
     {
+        //Item Scroll
+        if(items.Count > 0)
+        {
+            if(Input.GetKeyDown(KeyCode.Q))
+            {
+                itemIndex++;
+                if (itemIndex > items.Count - 1) itemIndex = 0;
+
+                ItemSelectedUI();
+            }
+        }
+
         if (!grabbing)
         {
             Drag();
@@ -82,7 +96,7 @@ public class Interactor : MonoBehaviour
 
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        AddItemToInv(objectToInteract.GetComponent<Item>());
+                        AddItemToInv();
                     }
                 }
             }
@@ -115,10 +129,43 @@ public class Interactor : MonoBehaviour
         }
     }
 
-    void AddItemToInv(Item item)
+    void AddItemToInv()
     {
+        Item item = objectToInteract.GetComponent<Item>();
         items.Add(item);
+
+        if (itemImage.sprite == itemNullSprite)
+        {
+            itemImage.sprite = item.itemImage;
+            currentItem = item;
+        }
+
         Destroy(objectToInteract);
         objectToInteract = null;
+    }
+
+    void ItemSelectedUI()
+    {
+        currentItem = items[itemIndex];
+        itemImage.sprite = currentItem.itemImage;
+    }
+
+    void UseItem()
+    {
+        if(currentItem != null)
+        {
+            items.Remove(currentItem);
+            if(items.Count > 0)
+            {
+                itemIndex--;
+                ItemSelectedUI();
+            }
+            if(items.Count == 0)
+            {
+                itemIndex = -1;
+                itemImage.sprite = itemNullSprite;
+            }
+
+        }
     }
 }
