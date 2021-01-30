@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 509630378}
   - component: {fileID: 509630377}
   - component: {fileID: 509630382}
+  - component: {fileID: 509630383}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Interactable
@@ -245,6 +246,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPickable: 1
+--- !u!114 &509630383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509630376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 1, b: 0, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &655992215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -440,6 +459,7 @@ GameObject:
   - component: {fileID: 823821061}
   - component: {fileID: 823821060}
   - component: {fileID: 823821059}
+  - component: {fileID: 823821065}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Interactable
@@ -550,6 +570,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &823821065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823821058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 1, b: 0, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &832882621
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +696,7 @@ GameObject:
   - component: {fileID: 848012566}
   - component: {fileID: 848012565}
   - component: {fileID: 848012564}
+  - component: {fileID: 848012570}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Interactable
@@ -768,6 +807,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &848012570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848012563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 1, b: 0, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!4 &1241443020 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8851399817074991789, guid: 17b6a3f1903e234429f290388800d4f0,

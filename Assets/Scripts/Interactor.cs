@@ -37,8 +37,15 @@ public class Interactor : MonoBehaviour
         {
             Debug.Log(hit.collider.gameObject.name);
 
+            if(objectToInteract != null && hit.collider.gameObject != objectToInteract)
+            {
+                objectToInteract.GetComponent<Outline>().HideOutline();
+            }
+
             if (hit.collider != null && hit.collider.CompareTag("Interactable"))
             {
+                hit.collider.GetComponent<Outline>().ShowOutline();
+
                 if (hit.collider.GetComponent<Interactable>().isPickable)
                 {
                     objectToInteract = hit.collider.gameObject;
@@ -46,7 +53,7 @@ public class Interactor : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         currentInteractable = objectToInteract;
-                        objectToInteract = null;
+                        //objectToInteract = null;
                         currentInteractable.GetComponent<Interactable>().isPickable = false;
                         currentInteractable.transform.SetParent(mainCamera.transform);
                         currentInteractable.transform.position = Vector3.Lerp(
@@ -63,9 +70,6 @@ public class Interactor : MonoBehaviour
                 }
 
             }
-
-            
-
         }
     } 
 
