@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Models/Cocina/Cocina Paquete harina.fbx.meta
 guid: 3448a36c547bc1741b7b83c9d5a14cc3
+=======
+guid: cbd36e687f973c84dad330b3a1a4706d
+>>>>>>> cc2c390b09db9694d6ef61478efc39056c86d237:Assets/Models/Cocina/Cocina artefactoblend.blend.meta
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []

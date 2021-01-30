@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Models/Cocina/Cocina Mesa.fbx.meta
 guid: 26c7729d7d0059a428bcedd34ad268c7
+=======
+guid: cabcb31b64bde374798daee213588b3a
+>>>>>>> cc2c390b09db9694d6ef61478efc39056c86d237:Assets/Models/Cocina/Cocina Mesa.blend.meta
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Models/Cocina/Cocina Heladera.fbx.meta
 guid: 2c55e3a162241424095afcf2082f260b
+=======
+guid: f52fe6bb413e40142a0ecd52ed0b70f3
+>>>>>>> cc2c390b09db9694d6ef61478efc39056c86d237:Assets/Models/Cocina/Cocina Heladera.blend.meta
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
