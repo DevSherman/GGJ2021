@@ -18,7 +18,6 @@ public class Outline : MonoBehaviour
     //Code added
     private bool outlineActive;
 
-
     public void ShowOutline()
     {
         if(!outlineActive)
@@ -26,7 +25,6 @@ public class Outline : MonoBehaviour
             outlineActive = true;
             foreach (var renderer in renderers)
             {
-
                 // Append outline shaders
                 var materials = renderer.sharedMaterials.ToList();
 

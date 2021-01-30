@@ -99,6 +99,16 @@ public class Interactor : MonoBehaviour
                         AddItemToInv();
                     }
                 }
+                if (hit.collider.CompareTag("Activable"))
+                {
+                    objectToInteract = hit.collider.gameObject;
+                    objectToInteract.GetComponent<Outline>().ShowOutline();
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        objectToInteract.GetComponent<Activable>().Use();
+                    }
+                }
             }
             else 
             {
