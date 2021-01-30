@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Models/Cocina.meta
 guid: 6ef5425b7be2e6b4a8cdc27ce5e9b36c
+=======
+guid: 10b2ce9a9eec74a47a963da4ab0722d7
+>>>>>>> b75749f5f83ec830afcbfe6b95f195e923b013d8:Assets/Sounds.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

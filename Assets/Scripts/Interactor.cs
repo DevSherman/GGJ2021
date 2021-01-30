@@ -7,7 +7,7 @@ public class Interactor : MonoBehaviour
 {
     public GameObject currentInteractable;
     public GameObject objectToInteract;
-    public Transform interactionZone;
+    //public Transform interactionZone;
     private Camera mainCamera;
     public bool grabbing;
     public float distance = 5f;
@@ -16,7 +16,7 @@ public class Interactor : MonoBehaviour
     public Image itemImage;
     public Sprite itemNullSprite;
     private List<Item> items;
-    private Item currentItem;
+    public Item currentItem;
     private int itemIndex = -1;
 
     private void Start()
@@ -109,6 +109,13 @@ public class Interactor : MonoBehaviour
                         objectToInteract.GetComponent<Activable>().Use();
                     }
                 }
+                if (hit.collider.CompareTag("ActivableWithItem"))
+                {
+                    objectToInteract = hit.collider.gameObject;
+                    objectToInteract.GetComponent<Outline>().ShowOutline();
+
+                    if (Input.GetKeyDown(KeyCode.E)) UseItem();
+                }
             }
             else 
             {
@@ -150,7 +157,9 @@ public class Interactor : MonoBehaviour
             currentItem = item;
         }
 
-        Destroy(objectToInteract);
+        item.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        item.gameObject.GetComponent<BoxCollider>().enabled = false;
+
         objectToInteract = null;
     }
 
@@ -162,20 +171,24 @@ public class Interactor : MonoBehaviour
 
     void UseItem()
     {
-        if(currentItem != null)
+        if (currentItem != null)
         {
-            items.Remove(currentItem);
-            if(items.Count > 0)
+            if (objectToInteract.GetComponent<ActivableWithItem>().itemNameRequiered == currentItem.name)
             {
-                itemIndex--;
-                ItemSelectedUI();
+                items.Remove(currentItem);
+                if (items.Count > 0)
+                {
+                    itemIndex--;
+                    ItemSelectedUI();
+                }
+                if (items.Count == 0)
+                {
+                    itemIndex = -1;
+                    itemImage.sprite = itemNullSprite;
+                }
+                Destroy(currentItem);
+                currentItem = null;
             }
-            if(items.Count == 0)
-            {
-                itemIndex = -1;
-                itemImage.sprite = itemNullSprite;
-            }
-
         }
     }
 }
