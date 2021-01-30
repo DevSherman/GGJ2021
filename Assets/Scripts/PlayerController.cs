@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
         jumping = !IsGrounded();
 
-        Wawla();
+        //Wawla();
     }
     void FixedUpdate()
     {
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
 
-    void Wawla()
+    /*void Wawla()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -58,5 +58,5 @@ public class PlayerController : MonoBehaviour
             Debug.Log(hit.collider.gameObject.name);    
         }
         Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * 100, Color.red);
-    }
+    }*/
 }
