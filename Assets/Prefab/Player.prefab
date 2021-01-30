@@ -113,6 +113,8 @@ MonoBehaviour:
   distToGround: 1
   jumping: 0
   moving: 0
+  rotationSpeed: 200
+  RotationMultiplier: 0.4
 --- !u!114 &8851399817074991788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +144,6 @@ GameObject:
   - component: {fileID: 8851399817870550293}
   - component: {fileID: 8851399817870550290}
   - component: {fileID: 8851399817870550291}
-  - component: {fileID: 8851399817870550292}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -215,18 +216,3 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8851399817870550288}
   m_Enabled: 1
---- !u!114 &8851399817870550292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8851399817870550288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a885f932b47ef7240b2e1d11e50591a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensitivity: 5
-  smoothing: 2
-  character: {fileID: 8851399817074991783}

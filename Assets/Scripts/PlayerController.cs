@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rig;
     private Animator anim;
 
+    float m_CameraVerticalAngle = 0f;
+
+    public float rotationSpeed = 200f;
+    public float RotationMultiplier = 0.4f;
+
     private void Awake()
     {
         rig = GetComponent<Rigidbody>();
@@ -28,6 +33,23 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vector2 direction = new Vector2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
+
+        {
+            // rotate the transform with the input speed around its local Y axis
+            transform.Rotate(new Vector3(0f, (Input.GetAxisRaw("Mouse X") * 1 * 0.05f * rotationSpeed * RotationMultiplier), 0f), Space.Self);
+        }
+
+        // vertical camera rotation
+        {
+            // add vertical inputs to the camera's vertical angle
+            m_CameraVerticalAngle += Input.GetAxisRaw("Mouse Y") * 1 * 0.05f * rotationSpeed * RotationMultiplier;
+
+            // limit the camera's vertical angle to min/max
+            m_CameraVerticalAngle = Mathf.Clamp(m_CameraVerticalAngle, -89f, 89f);
+
+            // apply the vertical angle as a local rotation to the camera transform along its right axis (makes it pivot up and down)
+            Camera.main.transform.localEulerAngles = new Vector3(-m_CameraVerticalAngle, 0, 0);
+        }
 
         if (direction.magnitude > 0)
         {
