@@ -962,10 +962,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8851399817074991787, guid: 17b6a3f1903e234429f290388800d4f0,
+    - target: {fileID: 8851399817074991788, guid: 17b6a3f1903e234429f290388800d4f0,
         type: 3}
+      propertyPath: distance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8851399817074991788, guid: 17b6a3f1903e234429f290388800d4f0,
+        type: 3}
+      propertyPath: distance
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8851399817074991789, guid: 17b6a3f1903e234429f290388800d4f0,
         type: 3}
@@ -1052,7 +1061,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8851399817074991786, guid: 17b6a3f1903e234429f290388800d4f0, type: 3}
-    - {fileID: 8851399817074991787, guid: 17b6a3f1903e234429f290388800d4f0, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17b6a3f1903e234429f290388800d4f0, type: 3}

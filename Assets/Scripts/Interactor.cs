@@ -31,14 +31,21 @@ public class Interactor : MonoBehaviour
 
     void Drag()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        //Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0)), out hit))
+        if (Physics.Raycast(mainCamera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0)), out hit, distance))
         {
             Debug.Log(hit.collider.gameObject.name);
 
+            if (objectToInteract != null && hit.collider.gameObject != objectToInteract)
+            {
+                objectToInteract.GetComponent<Outline>().HideOutline();
+            }
+
             if (hit.collider != null && hit.collider.CompareTag("Interactable"))
             {
+                hit.collider.GetComponent<Outline>().ShowOutline();
+
                 if (hit.collider.GetComponent<Interactable>().isPickable)
                 {
                     objectToInteract = hit.collider.gameObject;
@@ -46,7 +53,7 @@ public class Interactor : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         currentInteractable = objectToInteract;
-                        objectToInteract = null;
+                        //objectToInteract = null;
                         currentInteractable.GetComponent<Interactable>().isPickable = false;
                         currentInteractable.transform.SetParent(mainCamera.transform);
                         currentInteractable.transform.position = Vector3.Lerp(
@@ -56,16 +63,17 @@ public class Interactor : MonoBehaviour
                         currentInteractable.gameObject.GetComponent<Rigidbody>().useGravity = false;
                         currentInteractable.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                         grabbing = true;
-
                     }
-
-
                 }
 
             }
-
-            
-
+        }
+        else
+        {
+            if (objectToInteract != null)
+            {
+                objectToInteract.GetComponent<Outline>().HideOutline();
+            }
         }
     } 
 
