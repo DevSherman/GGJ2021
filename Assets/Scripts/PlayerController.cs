@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         float v = Input.GetAxis("Vertical") * speed * Time.deltaTime;
         float h = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        if (v > 0 || h > 0)
+        if (v != 0 || h != 0)
         {
             transform.Translate(h, 0, v, Space.Self);
             moving = true;
