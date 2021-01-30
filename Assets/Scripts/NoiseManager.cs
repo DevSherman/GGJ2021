@@ -4,15 +4,44 @@ using UnityEngine;
 
 public class NoiseManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float noise = 0;
+
+    public void OnEnable()
     {
-        
+        EventManager.StartListening("NOISE", HandleNoise);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnDisable()
     {
-        
+        EventManager.StopListening("NOISE", HandleNoise);
     }
+
+    public void HandleNoise(Hashtable eventParams)
+    {
+        if (noise >= 100F)
+        {
+            EventManager.TriggerEvent("GAME_OVER");
+        }
+
+        if (eventParams.ContainsKey("JUMP"))
+        {
+            float noiseIncoming = float.Parse(eventParams["JUMP"].ToString());
+            
+            AddNoise(noiseIncoming);
+        }
+    } 
+
+    public void AddNoise(float noiseIncoming)
+    {
+        noise += noiseIncoming;
+        EventManager.TriggerEvent("UPDATE_NOISE_BAR", new Hashtable() { { "NOISE_VALUE", noise } });
+    }
+
+    public void ReduceNoise(float value)
+    {
+        noise -= value;
+        EventManager.TriggerEvent("UPDATE_NOISE_BAR", new Hashtable() { { "NOISE_VALUE", noise } });
+
+    }
+
 }

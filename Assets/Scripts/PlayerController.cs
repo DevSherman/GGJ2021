@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && !jumping)
         {
             rig.AddForce(new Vector3(0, jumpFactor, 0), ForceMode.Impulse);
+            EventManager.TriggerEvent("NOISE", new Hashtable() { { "JUMP", 20 } });
         }
 
     }
