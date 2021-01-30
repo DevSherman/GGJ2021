@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
         mainCamera = GetComponentInChildren<Camera>();
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     void Update()
     {
         float v = Input.GetAxis("Vertical") * speed * Time.deltaTime;
@@ -32,8 +37,6 @@ public class PlayerController : MonoBehaviour
         else moving = false;
 
         jumping = !IsGrounded();
-
-        //Wawla();
     }
     void FixedUpdate()
     {
@@ -48,15 +51,4 @@ public class PlayerController : MonoBehaviour
     {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
-
-    /*void Wawla()
-    {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if(Physics.Linecast(mainCamera.transform.position, mainCamera.transform.forward * 100, out hit))
-        {
-            Debug.Log(hit.collider.gameObject.name);    
-        }
-        Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * 100, Color.red);
-    }*/
 }
