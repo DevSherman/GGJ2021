@@ -33,9 +33,7 @@ public class PlayerCharacterController : MonoBehaviour
     public float accelerationSpeedInAir = 25f;
     [Tooltip("Multiplicator for the sprint speed (based on grounded speed)")]
     public float sprintSpeedModifier = 2f;
-    [Tooltip("Height at which the player dies instantly when falling off the map")]
-    public float killHeight = -50f;
-
+   
     [Header("Rotation")]
     [Tooltip("Rotation speed for moving the camera")]
     public float rotationSpeed = 200f;
@@ -130,6 +128,11 @@ public class PlayerCharacterController : MonoBehaviour
             audioSource.PlayOneShot(landSFX);
             EventManager.TriggerEvent("NOISE", new Hashtable() { { "FALL", 20 } });
 
+        }
+
+        if(characterVelocity.magnitude < 4.5f)
+        {
+            EventManager.TriggerEvent("SILENCE");
         }
 
 

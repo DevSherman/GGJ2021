@@ -9,11 +9,15 @@ public class NoiseManager : MonoBehaviour
     public void OnEnable()
     {
         EventManager.StartListening("NOISE", HandleNoise);
+        EventManager.StartListening("SILENCE", HandleSilence);
+
     }
 
     public void OnDisable()
     {
         EventManager.StopListening("NOISE", HandleNoise);
+        EventManager.StartListening("SILENCE", HandleSilence);
+
     }
 
     public void HandleNoise(Hashtable eventParams)
@@ -36,20 +40,34 @@ public class NoiseManager : MonoBehaviour
 
             AddNoise(noiseIncoming);
         }
-    } 
+    }
+
+
+
+    public void HandleSilence(Hashtable eventParams)
+    {
+        ReduceNoise(0.05f);
+    }
 
     public void AddNoise(float noiseIncoming)
     {
-      
-        noise += noiseIncoming;
-        EventManager.TriggerEvent("UPDATE_NOISE_BAR", new Hashtable() { { "NOISE_VALUE", noise } });
+        if(noise <= 100)
+        {
+            noise += noiseIncoming;
+            EventManager.TriggerEvent("UPDATE_NOISE_BAR", new Hashtable() { { "NOISE_VALUE", noise } });
+        }
+    
      
     }
 
     public void ReduceNoise(float value)
     {
-        noise -= value;
-        EventManager.TriggerEvent("UPDATE_NOISE_BAR", new Hashtable() { { "NOISE_VALUE", noise } });
+        if(noise >= 0)
+        {
+            noise -= value;
+            EventManager.TriggerEvent("UPDATE_NOISE_BAR", new Hashtable() { { "NOISE_VALUE", noise } });
+        }
+
 
     }
 
