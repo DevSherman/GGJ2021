@@ -23,18 +23,27 @@ public class NoiseManager : MonoBehaviour
             EventManager.TriggerEvent("GAME_OVER");
         }
 
-        if (eventParams.ContainsKey("JUMP"))
+        if (eventParams.ContainsKey("FALL"))
         {
-            float noiseIncoming = float.Parse(eventParams["JUMP"].ToString());
+            float noiseIncoming = float.Parse(eventParams["FALL"].ToString());
             
+            AddNoise(noiseIncoming);
+        }
+
+        if (eventParams.ContainsKey("RUN"))
+        {
+            float noiseIncoming = 0.05f;
+
             AddNoise(noiseIncoming);
         }
     } 
 
     public void AddNoise(float noiseIncoming)
     {
+      
         noise += noiseIncoming;
         EventManager.TriggerEvent("UPDATE_NOISE_BAR", new Hashtable() { { "NOISE_VALUE", noise } });
+     
     }
 
     public void ReduceNoise(float value)
