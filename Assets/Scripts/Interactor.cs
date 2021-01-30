@@ -9,7 +9,8 @@ public class Interactor : MonoBehaviour
     public Transform interactionZone;
     private Camera mainCamera;
     public bool grabbing;
-
+    public float distance = 5f;
+    public float smooth = 5f;
 
     private void Start()
     {
@@ -32,7 +33,7 @@ public class Interactor : MonoBehaviour
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Linecast(mainCamera.transform.position, mainCamera.transform.forward * 100, out hit))
+        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0)), out hit))
         {
             Debug.Log(hit.collider.gameObject.name);
 
@@ -47,8 +48,11 @@ public class Interactor : MonoBehaviour
                         currentInteractable = objectToInteract;
                         objectToInteract = null;
                         currentInteractable.GetComponent<Interactable>().isPickable = false;
-                        currentInteractable.transform.SetParent(interactionZone.transform);
-                        currentInteractable.transform.position = interactionZone.position;
+                        currentInteractable.transform.SetParent(mainCamera.transform);
+                        currentInteractable.transform.position = Vector3.Lerp(
+                            currentInteractable.transform.position,
+                            mainCamera.transform.position + mainCamera.transform.forward * distance,
+                            Time.deltaTime * smooth);
                         currentInteractable.gameObject.GetComponent<Rigidbody>().useGravity = false;
                         currentInteractable.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                         grabbing = true;
@@ -63,7 +67,6 @@ public class Interactor : MonoBehaviour
             
 
         }
-        Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * 100, Color.red);
     } 
 
     void Drop()
