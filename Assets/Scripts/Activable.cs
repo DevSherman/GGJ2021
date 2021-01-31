@@ -28,7 +28,7 @@ public class Activable : MonoBehaviour
 
     public void Update()
     {
-        if(!onlyRotate)
+        if (!onlyRotate)
         {
             if (active) transform.localPosition = Vector3.Lerp(transform.localPosition, pos_end, Time.deltaTime * pos_speed);
             else transform.localPosition = Vector3.Lerp(transform.localPosition, pos_origin, Time.deltaTime * pos_speed);
