@@ -15,6 +15,8 @@ public class Activable : MonoBehaviour
     private Quaternion rot_origin;
     public Quaternion rot_end;
 
+    public float minDist = 0.01f;
+
     private void Start()
     {
         pos_origin = transform.localPosition;
@@ -30,13 +32,29 @@ public class Activable : MonoBehaviour
     {
         if (!onlyRotate)
         {
-            if (active) transform.localPosition = Vector3.Lerp(transform.localPosition, pos_end, Time.deltaTime * pos_speed);
-            else transform.localPosition = Vector3.Lerp(transform.localPosition, pos_origin, Time.deltaTime * pos_speed);
+            if (active)
+            {
+                if(Vector3.Distance(transform.localPosition, pos_end) > minDist)
+                    transform.localPosition = Vector3.Lerp(transform.localPosition, pos_end, Time.deltaTime * pos_speed);
+            }
+            else
+            {
+                if (Vector3.Distance(transform.localPosition, pos_origin) > minDist)
+                    transform.localPosition = Vector3.Lerp(transform.localPosition, pos_origin, Time.deltaTime * pos_speed);
+            }
         }
         else
         {
-            if (active) transform.localRotation = Quaternion.Lerp(transform.localRotation, rot_end, Time.deltaTime * rot_speed);
-            else transform.localRotation = Quaternion.Lerp(transform.localRotation, rot_origin, Time.deltaTime * rot_speed);
+            if (active)
+            {
+                //if(Quaternion.Angle(transform.localRotation, rot_end) > 1f)
+                    transform.localRotation = Quaternion.Lerp(transform.localRotation, rot_end, Time.deltaTime * rot_speed);
+            }
+            else
+            {
+                //if (Quaternion.Angle(transform.localRotation, rot_origin) > 1f)
+                    transform.localRotation = Quaternion.Lerp(transform.localRotation, rot_origin, Time.deltaTime * rot_speed);
+            }
         }
     }
 }

@@ -18,14 +18,17 @@ public class Outline : MonoBehaviour
     //Code added
     private bool outlineActive;
 
+    public bool inChildren;
+
     public void ShowOutline()
     {
         if(!outlineActive)
         {
             outlineActive = true;
-            foreach (var renderer in renderers)
+            // Append outline shaders
+
+            if(!inChildren)
             {
-                // Append outline shaders
                 var materials = renderer.sharedMaterials.ToList();
 
                 materials.Add(outlineMaskMaterial);
@@ -33,16 +36,35 @@ public class Outline : MonoBehaviour
 
                 renderer.materials = materials.ToArray();
             }
+            else
+            {
+                var materials = GetComponentInChildren<Renderer>().sharedMaterials.ToList();
+
+                materials.Add(outlineMaskMaterial);
+                materials.Add(outlineFillMaterial);
+
+                renderer.materials = materials.ToArray();
+            }
+
         }
 
     }
     public void HideOutline()
     {
         outlineActive = false;
-        foreach (var renderer in renderers)
+
+        if (!inChildren)
         {
-            // Remove outline shaders
             var materials = renderer.sharedMaterials.ToList();
+
+            materials.Remove(outlineMaskMaterial);
+            materials.Remove(outlineFillMaterial);
+
+            renderer.materials = materials.ToArray();
+        }
+        else
+        {
+            var materials = GetComponentInChildren<Renderer>().sharedMaterials.ToList();
 
             materials.Remove(outlineMaskMaterial);
             materials.Remove(outlineFillMaterial);
@@ -114,7 +136,7 @@ public class Outline : MonoBehaviour
   [SerializeField, HideInInspector]
   private List<ListVector3> bakeValues = new List<ListVector3>();
 
-  private Renderer[] renderers;
+  private Renderer renderer;
   private Material outlineMaskMaterial;
   private Material outlineFillMaterial;
 
@@ -125,7 +147,9 @@ public class Outline : MonoBehaviour
   void Awake() {
 
     // Cache renderers
-    renderers = GetComponentsInChildren<Renderer>();
+    if(!inChildren) renderer = GetComponent<Renderer>();
+    else renderer = GetComponentInChildren<Renderer>();
+
 
     // Instantiate outline materials
     outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
