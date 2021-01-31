@@ -25,6 +25,10 @@ public class Interactor : MonoBehaviour
     {
         mainCamera = GetComponentInChildren<Camera>();
         items = new List<Item>();
+
+        itemNullSprite = Resources.Load<Sprite>("itemNull");
+        itemImage = GameObject.Find("GameHUD").GetComponent<GameHUD>().itemImage;
+
     }
 
     private void Update()
@@ -200,10 +204,14 @@ public class Interactor : MonoBehaviour
 
     void UseItem()
     {
+
         if (currentItem != null)
         {
-            if (objectToInteract.GetComponent<ActivableWithItem>().itemNameRequiered == currentItem.name)
+            ActivableWithItem script = objectToInteract.GetComponent<ActivableWithItem>();
+            if (script.itemNameRequiered == currentItem.itemName)
             {
+                Debug.Log("Use");
+
                 items.Remove(currentItem);
                 if (items.Count > 0)
                 {
@@ -217,6 +225,10 @@ public class Interactor : MonoBehaviour
                 }
                 Destroy(currentItem);
                 currentItem = null;
+
+                script.Use();
+
+                Debug.Log("Item used");
             }
         }
     }

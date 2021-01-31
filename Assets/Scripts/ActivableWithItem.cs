@@ -5,4 +5,9 @@ using UnityEngine;
 public class ActivableWithItem : MonoBehaviour
 {
     public string itemNameRequiered;
+
+    public void Use()
+    {
+        GetComponent<Activable>().Use();
+    }
 }
