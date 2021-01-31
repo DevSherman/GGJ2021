@@ -81,46 +81,43 @@ public class GameFlowManager : MonoBehaviour
 
     private void HandleWin(Hashtable arg0)
     {
-        EndGame(true);
+        Timer.timerIsRunning = false;
+
+        // unlocks the cursor before leaving the scene, to be able to click buttons
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        // Remember that we need to load the appropriate end scene after a delay
+        gameIsEnding = true;
+        endGameFadeCanvasGroup.gameObject.SetActive(true);
+
+        Debug.Log("WIN GAME");
+
+        m_SceneToLoad = winSceneName;
+        m_TimeLoadEndGameScene = Time.time + endSceneLoadDelay + delayBeforeFadeToBlack;
+
+        // play a sound on win
+        var audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = victorySound;
+        audioSource.playOnAwake = false;
+        audioSource.outputAudioMixerGroup = AudioUtility.GetAudioGroup(AudioUtility.AudioGroups.HUDVictory);
+        audioSource.PlayScheduled(AudioSettings.dspTime + delayBeforeWinMessage);
     }
 
     private void HandleGameOver(Hashtable arg0)
      {
-         EndGame(false);
-     }
+        Timer.timerIsRunning = false;
 
-    
-     void EndGame(bool win)
-     {
-         Timer.timerIsRunning = false;
+        // unlocks the cursor before leaving the scene, to be able to click buttons
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        // Remember that we need to load the appropriate end scene after a delay
+        gameIsEnding = true;
+        endGameFadeCanvasGroup.gameObject.SetActive(true);
 
-         // unlocks the cursor before leaving the scene, to be able to click buttons
-         Cursor.lockState = CursorLockMode.None;
-         Cursor.visible = true;
-         // Remember that we need to load the appropriate end scene after a delay
-         gameIsEnding = true;
-         endGameFadeCanvasGroup.gameObject.SetActive(true);
-         if (win)
-         {
-            Debug.Log("WIN GAME");
+        Debug.Log("GAME OVER");
 
-            m_SceneToLoad = winSceneName;
-             m_TimeLoadEndGameScene = Time.time + endSceneLoadDelay + delayBeforeFadeToBlack;
+        m_SceneToLoad = loseSceneName;
+        m_TimeLoadEndGameScene = Time.time + endSceneLoadDelay;
 
-             // play a sound on win
-             var audioSource = gameObject.AddComponent<AudioSource>();
-             audioSource.clip = victorySound;
-             audioSource.playOnAwake = false;
-             audioSource.outputAudioMixerGroup = AudioUtility.GetAudioGroup(AudioUtility.AudioGroups.HUDVictory);
-             audioSource.PlayScheduled(AudioSettings.dspTime + delayBeforeWinMessage);
-
-        }
-        else
-        {
-            Debug.Log("GAME OVER");
-
-            m_SceneToLoad = loseSceneName;
-            m_TimeLoadEndGameScene = Time.time + endSceneLoadDelay;
-        }
     }
 }

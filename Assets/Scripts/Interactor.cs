@@ -19,6 +19,7 @@ public class Interactor : MonoBehaviour
     public Item currentItem;
     public int itemIndex = -1;
     public ObjectiveManager objectiveManager;
+    public FadeOutMsg fadeOutMsg;
 
 
     private void Start()
@@ -237,6 +238,8 @@ public class Interactor : MonoBehaviour
                 }
 
             }
+            else fadeOutMsg.Show();
         }
+        else fadeOutMsg.Show();
     }
 }
