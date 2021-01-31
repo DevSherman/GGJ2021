@@ -17,7 +17,7 @@ public class Interactor : MonoBehaviour
     public Sprite itemNullSprite;
     private List<Item> items;
     public Item currentItem;
-    private int itemIndex = -1;
+    public int itemIndex = -1;
     public ObjectiveManager objectiveManager;
 
 
@@ -34,15 +34,13 @@ public class Interactor : MonoBehaviour
     private void Update()
     {
         //Item Scroll
-        if(items.Count > 0)
-        {
-            if(Input.GetKeyDown(KeyCode.Q))
-            {
-                itemIndex++;
-                if (itemIndex > items.Count - 1) itemIndex = 0;
 
-                ItemSelectedUI();
-            }
+        if(Input.GetKeyDown(KeyCode.Q) && items.Count > 0)
+        {
+            itemIndex++;
+            if (itemIndex > items.Count - 1) itemIndex = 0;
+
+            ItemSelectedUI();
         }
 
         if (!grabbing)
@@ -177,6 +175,7 @@ public class Interactor : MonoBehaviour
         {
             itemImage.sprite = item.itemImage;
             currentItem = item;
+            itemIndex++;
         }
 
         item.gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -206,31 +205,37 @@ public class Interactor : MonoBehaviour
 
     void UseItem()
     {
-
         if (currentItem != null)
         {
             ActivableWithItem script = objectToInteract.GetComponent<ActivableWithItem>();
             if (script.itemNameRequiered == currentItem.itemName)
             {
-                Debug.Log("Use");
+                script.Use();
 
                 items.Remove(currentItem);
-                if (items.Count > 0)
+                Destroy(currentItem);
+                currentItem = null;
+
+                if(items.Count == 1)
+                {
+                    currentItem = items[0];
+                    itemImage.sprite = currentItem.itemImage;
+                    return;
+                }
+
+                if (items.Count > 1)
                 {
                     itemIndex--;
                     ItemSelectedUI();
+                    return;
                 }
                 if (items.Count == 0)
                 {
                     itemIndex = -1;
                     itemImage.sprite = itemNullSprite;
+                    return;
                 }
-                Destroy(currentItem);
-                currentItem = null;
 
-                script.Use();
-
-                Debug.Log("Item used");
             }
         }
     }

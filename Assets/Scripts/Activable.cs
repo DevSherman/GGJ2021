@@ -11,7 +11,7 @@ public class Activable : MonoBehaviour
     public Vector3 pos_end;
 
     public bool onlyRotate;
-    public float rot_speed = 5f;
+    public float rot_speed = 0.01f;
     private Quaternion rot_origin;
     public Quaternion rot_end;
 
