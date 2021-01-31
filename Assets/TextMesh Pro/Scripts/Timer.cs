@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour
                 Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
-                timeText.text = string.Format("{0:00}:{1:00}:{2:000}", 0, 0, 0);
+                timeText.text = string.Format("{0:00}:{1:00}:{2:00}", 0, 0, 0);
 
                 EventManager.TriggerEvent("GAME_OVER");
             }
@@ -43,8 +43,8 @@ public class Timer : MonoBehaviour
 
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        float milliSeconds = (timeToDisplay % 1) * 1000;
+        float milliSeconds = (timeToDisplay % 1) * 100;
 
-        timeText.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliSeconds);
+        timeText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliSeconds);
     }
 }
