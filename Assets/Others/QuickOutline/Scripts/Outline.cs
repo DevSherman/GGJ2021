@@ -18,6 +18,7 @@ public class Outline : MonoBehaviour
     //Code added
     private bool outlineActive;
     public bool useChild;
+    public bool objective;
 
     public void ShowOutline()
     {
@@ -31,6 +32,8 @@ public class Outline : MonoBehaviour
             materials.Add(outlineFillMaterial);
 
             render.materials = materials.ToArray();
+
+            if(objective) GetComponentInChildren<Light>().enabled = true;
         }
 
     }
@@ -43,6 +46,8 @@ public class Outline : MonoBehaviour
         materials.Remove(outlineFillMaterial);
 
         render.materials = materials.ToArray();
+
+        if (objective) GetComponentInChildren<Light>().enabled = false;
     }
     //
 
@@ -124,7 +129,7 @@ public class Outline : MonoBehaviour
 
 
         // Instantiate outline materials
-        outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
+    outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
     outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineFill"));
 
     outlineMaskMaterial.name = "OutlineMask (Instance)";

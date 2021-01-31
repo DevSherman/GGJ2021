@@ -181,6 +181,7 @@ public class Interactor : MonoBehaviour
 
         item.gameObject.GetComponent<MeshRenderer>().enabled = false;
         item.gameObject.GetComponent<Collider>().enabled = false;
+        item.GetComponentInChildren<Light>().enabled = false;
 
         objectToInteract = null;
     }
