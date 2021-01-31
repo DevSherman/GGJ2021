@@ -25,7 +25,7 @@ public class PlayerCharacterController : MonoBehaviour
     float m_CameraVerticalAngle = 0f;
 
     public float footstepSFXFrequencyWhileSprinting = 1f;
-    public AudioClip footstepSFX;
+    public AudioClip[] footstepSFXs;
     public AudioClip jumpSFX;
     public AudioClip landSFX;
 
@@ -71,7 +71,7 @@ public class PlayerCharacterController : MonoBehaviour
             moveDirection.y = movementDirectionY;
         }
 
-        if (isRunning)
+        if (isRunning && (curSpeedX > 0 || curSpeedY > 0))
         {
             EventManager.TriggerEvent("NOISE", new Hashtable() { { "RUN", 0.05f } });
         }
@@ -97,7 +97,7 @@ public class PlayerCharacterController : MonoBehaviour
         if (m_footstepDistanceCounter >= 1f / chosenFootstepSFXFrequency && characterController.isGrounded)
         {
             m_footstepDistanceCounter = 0f;
-            audioSource.PlayOneShot(footstepSFX);
+            audioSource.PlayOneShot(footstepSFXs[Random.Range(0, footstepSFXs.Length)]);
         }
         m_footstepDistanceCounter += characterController.velocity.magnitude * Time.deltaTime;
 
