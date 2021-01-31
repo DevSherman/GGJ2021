@@ -17,38 +17,32 @@ public class Outline : MonoBehaviour
 {
     //Code added
     private bool outlineActive;
+    public bool useChild;
 
     public void ShowOutline()
     {
         if(!outlineActive)
         {
             outlineActive = true;
-            foreach (var renderer in renderers)
-            {
                 // Append outline shaders
-                var materials = renderer.sharedMaterials.ToList();
+            var materials = render.sharedMaterials.ToList();
 
-                materials.Add(outlineMaskMaterial);
-                materials.Add(outlineFillMaterial);
+            materials.Add(outlineMaskMaterial);
+            materials.Add(outlineFillMaterial);
 
-                renderer.materials = materials.ToArray();
-            }
+            render.materials = materials.ToArray();
         }
 
     }
     public void HideOutline()
     {
         outlineActive = false;
-        foreach (var renderer in renderers)
-        {
-            // Remove outline shaders
-            var materials = renderer.sharedMaterials.ToList();
+        var materials = render.sharedMaterials.ToList();
 
-            materials.Remove(outlineMaskMaterial);
-            materials.Remove(outlineFillMaterial);
+        materials.Remove(outlineMaskMaterial);
+        materials.Remove(outlineFillMaterial);
 
-            renderer.materials = materials.ToArray();
-        }
+        render.materials = materials.ToArray();
     }
     //
 
@@ -114,7 +108,7 @@ public class Outline : MonoBehaviour
   [SerializeField, HideInInspector]
   private List<ListVector3> bakeValues = new List<ListVector3>();
 
-  private Renderer[] renderers;
+  private Renderer render;
   private Material outlineMaskMaterial;
   private Material outlineFillMaterial;
 
@@ -125,10 +119,12 @@ public class Outline : MonoBehaviour
   void Awake() {
 
     // Cache renderers
-    renderers = GetComponentsInChildren<Renderer>();
+    if(useChild) render = GetComponentInChildren<Renderer>();
+    else render = GetComponent<Renderer>();
 
-    // Instantiate outline materials
-    outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
+
+        // Instantiate outline materials
+        outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
     outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineFill"));
 
     outlineMaskMaterial.name = "OutlineMask (Instance)";
