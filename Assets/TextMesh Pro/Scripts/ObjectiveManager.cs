@@ -13,11 +13,7 @@ public class ObjectiveManager : MonoBehaviour
 
     private void HandleObjective(Hashtable eventParams)
     {
-        if (index == 3)
-        {
-            Debug.Log("win");
-            EventManager.TriggerEvent("WIN_GAME");
-        }
+
 
         if (eventParams.ContainsKey("JOYSTICK"))
         {
@@ -38,6 +34,12 @@ public class ObjectiveManager : MonoBehaviour
         {
             EventManager.TriggerEvent("CHECK", new Hashtable() { { "GAME", null } });
             index++;
+        }
+
+        if (index == 4)
+        {
+            Debug.Log("win");
+            EventManager.TriggerEvent("WIN_GAME");
         }
 
     }
