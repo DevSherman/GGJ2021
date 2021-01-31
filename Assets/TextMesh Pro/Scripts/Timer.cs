@@ -30,6 +30,9 @@ public class Timer : MonoBehaviour
                 Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
+                timeText.text = string.Format("{0:00}:{1:00}:{2:000}", 0, 0, 0);
+
+                EventManager.TriggerEvent("GAME_OVER");
             }
         }
     }

@@ -32,7 +32,6 @@ public class PlayerCharacterController : MonoBehaviour
     float m_footstepDistanceCounter;
     public float footstepSFXFrequency = 1f;
     public bool isGrounded { get; private set; }
-const float k_JumpGroundingPreventionTime = 0.2f;
 
     void Start()
     {
@@ -124,12 +123,7 @@ const float k_JumpGroundingPreventionTime = 0.2f;
 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Interactable")
-        {
-            EventManager.TriggerEvent("NOISE", new Hashtable() { { "COLLIDE_PLAYER", 10F } });
-        }
-    }
+
+   
 
 }

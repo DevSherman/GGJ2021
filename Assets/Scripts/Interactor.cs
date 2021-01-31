@@ -18,6 +18,8 @@ public class Interactor : MonoBehaviour
     private List<Item> items;
     public Item currentItem;
     private int itemIndex = -1;
+    public ObjectiveManager objectiveManager;
+
 
     private void Start()
     {
@@ -99,6 +101,20 @@ public class Interactor : MonoBehaviour
                         AddItemToInv();
                     }
                 }
+
+                if (hit.collider.CompareTag("Objective"))
+                {
+               
+
+                    objectToInteract = hit.collider.gameObject;
+                    objectToInteract.GetComponent<Outline>().ShowOutline();
+                    var itemName = objectToInteract.GetComponent<Item>().itemName;
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        AddObjective(itemName);
+                    }
+                }
+
                 if (hit.collider.CompareTag("Activable"))
                 {
                     objectToInteract = hit.collider.gameObject;
@@ -158,9 +174,22 @@ public class Interactor : MonoBehaviour
         }
 
         item.gameObject.GetComponent<MeshRenderer>().enabled = false;
-        item.gameObject.GetComponent<BoxCollider>().enabled = false;
+        item.gameObject.GetComponent<Collider>().enabled = false;
 
         objectToInteract = null;
+    }
+
+    void AddObjective(string name)
+    {
+        Item item = objectToInteract.GetComponent<Item>();
+        objectiveManager.m_Objectives.Add(item);
+        item.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        item.gameObject.GetComponent<Collider>().enabled = false;
+        item.gameObject.GetComponent<Item>().isPicked = true;
+        objectToInteract = null;
+
+        EventManager.TriggerEvent("OBJECTIVE", new Hashtable() { { name, null } });
+
     }
 
     void ItemSelectedUI()

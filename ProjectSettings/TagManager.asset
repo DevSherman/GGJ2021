@@ -8,6 +8,7 @@ TagManager:
   - Item
   - Activable
   - ActivableWithItem
+  - Objective
   layers:
   - Default
   - TransparentFX

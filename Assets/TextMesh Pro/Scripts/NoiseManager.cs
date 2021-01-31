@@ -20,6 +20,11 @@ public class NoiseManager : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+       
+    }
+
     public void HandleNoise(Hashtable eventParams)
     {
         if (noise >= 100F)
@@ -36,7 +41,14 @@ public class NoiseManager : MonoBehaviour
 
         if (eventParams.ContainsKey("RUN"))
         {
-            float noiseIncoming = 0.05f;
+            float noiseIncoming = 1;
+
+            AddNoise(noiseIncoming);
+        }
+
+        if (eventParams.ContainsKey("COLLIDE_WITH_PLAYER"))
+        {
+            float noiseIncoming = float.Parse(eventParams["COLLIDE_WITH_PLAYER"].ToString());
 
             AddNoise(noiseIncoming);
         }

@@ -25,7 +25,6 @@ public class Objective : MonoBehaviour
         // add this objective to the list contained in the objective manager
         ObjectiveManager objectiveManager = FindObjectOfType<ObjectiveManager>();
         DebugUtility.HandleErrorIfNullFindObject<ObjectiveManager, Objective>(objectiveManager, this);
-        objectiveManager.RegisterObjective(this);
 
         // register this objective in the ObjectiveHUDManger
         m_ObjectiveHUDManger = FindObjectOfType<ObjectiveHUDManger>();
