@@ -106,7 +106,7 @@ public class Interactor : MonoBehaviour
                     }
                 }
 
-                if (hit.collider.CompareTag("Objective"))
+                /*if (hit.collider.CompareTag("Objective"))
                 {
                
 
@@ -117,7 +117,7 @@ public class Interactor : MonoBehaviour
                     {
                         AddObjective(itemName);
                     }
-                }
+                }*/
 
                 if (hit.collider.CompareTag("Activable"))
                 {
@@ -171,6 +171,8 @@ public class Interactor : MonoBehaviour
         Item item = objectToInteract.GetComponent<Item>();
         items.Add(item);
 
+        EventManager.TriggerEvent("OBJECTIVE", new Hashtable() { { item.itemName.ToUpper(), null } });
+
         if (itemImage.sprite == itemNullSprite)
         {
             itemImage.sprite = item.itemImage;
@@ -183,7 +185,7 @@ public class Interactor : MonoBehaviour
         objectToInteract = null;
     }
 
-    void AddObjective(string name)
+    /*void AddObjective(string name)
     {
         Item item = objectToInteract.GetComponent<Item>();
         objectiveManager.m_Objectives.Add(item);
@@ -194,7 +196,7 @@ public class Interactor : MonoBehaviour
 
         EventManager.TriggerEvent("OBJECTIVE", new Hashtable() { { name, null } });
 
-    }
+    }*/
 
     void ItemSelectedUI()
     {

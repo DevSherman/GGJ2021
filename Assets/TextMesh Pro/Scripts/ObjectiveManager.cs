@@ -32,7 +32,6 @@ public class ObjectiveManager : MonoBehaviour
 
     private void HandleObjective(Hashtable eventParams)
     {
-
         if (AreAllObjectivesCompleted())
         {
 
@@ -48,9 +47,9 @@ public class ObjectiveManager : MonoBehaviour
         {
             EventManager.TriggerEvent("CHECK", new Hashtable() { { "CONSOLE", null } });
         }
-        if (eventParams.ContainsKey("WIRE"))
+        if (eventParams.ContainsKey("WIRES"))
         {
-            EventManager.TriggerEvent("CHECK", new Hashtable() { { "WIRE", null } });
+            EventManager.TriggerEvent("CHECK", new Hashtable() { { "WIRES", null } });
         }
         if (eventParams.ContainsKey("GAME"))
         {

@@ -36,7 +36,6 @@ public class UIManager : MonoBehaviour
     {
         if (eventParams.ContainsKey("JOYSTICK"))
         {
-
             checkJoystick.isOn = true;
         }
         if (eventParams.ContainsKey("GAME"))
@@ -47,7 +46,7 @@ public class UIManager : MonoBehaviour
         {
             checkConsole.isOn = true;
         }
-        if (eventParams.ContainsKey("WIRE"))
+        if (eventParams.ContainsKey("WIRES"))
         {
             checkWire.isOn = true;
         }

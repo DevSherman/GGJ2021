@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1210849380733365353
+--- !u!1 &3874841927812496328
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1983305345735161555}
-  - component: {fileID: 3182292458690214262}
-  - component: {fileID: 850390229967867324}
-  - component: {fileID: 2021171517237236028}
-  - component: {fileID: 2021171517237236027}
-  - component: {fileID: 2021171517237236026}
+  - component: {fileID: 7359989192870229441}
+  - component: {fileID: 2638483498116674945}
+  - component: {fileID: 4113968225195621709}
+  - component: {fileID: 6190716962475387022}
+  - component: {fileID: 6190716962475387009}
+  - component: {fileID: 6190716962475387008}
   m_Layer: 0
-  m_Name: Llavecita
+  m_Name: CONSOLE
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1983305345735161555
+--- !u!4 &7359989192870229441
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210849380733365353}
-  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
-  m_LocalPosition: {x: -0.51, y: 0.639, z: 3.021}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_GameObject: {fileID: 3874841927812496328}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.4338222, y: -4.7401366e-18, z: 2.1263537}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
---- !u!33 &3182292458690214262
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2638483498116674945
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210849380733365353}
-  m_Mesh: {fileID: -8803937527578110353, guid: eb3ca8fa83355ed4598bed42d73f0729, type: 3}
---- !u!23 &850390229967867324
+  m_GameObject: {fileID: 3874841927812496328}
+  m_Mesh: {fileID: 3909233067320746374, guid: b5ffa651e7056904892175a352133bfc, type: 3}
+--- !u!23 &4113968225195621709
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210849380733365353}
+  m_GameObject: {fileID: 3874841927812496328}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -61,7 +61,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6196226287257160713, guid: eb3ca8fa83355ed4598bed42d73f0729, type: 3}
+  - {fileID: -7805965318761107941, guid: b5ffa651e7056904892175a352133bfc, type: 3}
+  - {fileID: 7313688066774231973, guid: b5ffa651e7056904892175a352133bfc, type: 3}
+  - {fileID: 7534382358909941251, guid: b5ffa651e7056904892175a352133bfc, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,27 +84,42 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2021171517237236028
+--- !u!65 &6190716962475387022
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3874841927812496328}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2822162, y: 0.074127555, z: 0.19270921}
+  m_Center: {x: 0, y: 0.037063777, z: 0}
+--- !u!114 &6190716962475387009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210849380733365353}
+  m_GameObject: {fileID: 3874841927812496328}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3358fa3f62d33904da0f966dc2179e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemImage: {fileID: 21300000, guid: b6bbac9bc083f39468df5651467951d9, type: 3}
-  itemName: Llave
---- !u!114 &2021171517237236027
+  itemImage: {fileID: 21300000, guid: 0e70b36d21f28db47bc619a3b4148e86, type: 3}
+  itemName: CONSOLE
+  isObjective: 0
+  isPicked: 0
+--- !u!114 &6190716962475387008
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210849380733365353}
+  m_GameObject: {fileID: 3874841927812496328}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
@@ -114,16 +131,3 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!65 &2021171517237236026
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210849380733365353}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0015518945, y: 0.00062642153, z: 0.00011194802}
-  m_Center: {x: -0.011416864, y: 0.000034363482, z: 0}
